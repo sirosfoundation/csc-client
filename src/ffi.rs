@@ -145,9 +145,14 @@ impl FfiCscClient {
         let rt = tokio::runtime::Builder::new_current_thread()
             .enable_all()
             .build()
-            .map_err(|e| FfiCscError::Http { message: format!("failed to create tokio runtime: {e}") })?;
-        let inner = CscClient::new(base_url, DPopSignerBridge(dpop_signer))
-            .map_err(|e| FfiCscError::Http { message: e.to_string() })?;
+            .map_err(|e| FfiCscError::Http {
+                message: format!("failed to create tokio runtime: {e}"),
+            })?;
+        let inner = CscClient::new(base_url, DPopSignerBridge(dpop_signer)).map_err(|e| {
+            FfiCscError::Http {
+                message: e.to_string(),
+            }
+        })?;
         Ok(FfiCscClient { inner, rt })
     }
 

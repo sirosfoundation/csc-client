@@ -28,7 +28,10 @@ impl CscClient {
     /// - `base_url`: CSC API base URL (e.g. `https://qtsp.example.com/csc/v2`)
     /// - `dpop_signer`: implementation producing DPoP proof JWTs. Use [`NoDPop`]
     ///   if the QTSP doesn't require DPoP.
-    pub fn new(base_url: impl Into<String>, dpop_signer: impl DPopSigner + 'static) -> Result<Self> {
+    pub fn new(
+        base_url: impl Into<String>,
+        dpop_signer: impl DPopSigner + 'static,
+    ) -> Result<Self> {
         let http = Client::builder()
             .https_only(true)
             .build()
@@ -42,7 +45,10 @@ impl CscClient {
 
     /// Create a CSC client that also works over HTTP (for testing only).
     #[cfg(any(test, feature = "test-utils"))]
-    pub fn new_insecure(base_url: impl Into<String>, dpop_signer: impl DPopSigner + 'static) -> Result<Self> {
+    pub fn new_insecure(
+        base_url: impl Into<String>,
+        dpop_signer: impl DPopSigner + 'static,
+    ) -> Result<Self> {
         Ok(Self {
             base_url: base_url.into().trim_end_matches('/').to_string(),
             http: Client::new(),
@@ -65,9 +71,7 @@ impl CscClient {
             max_results: None,
         };
 
-        let resp = self
-            .post_json(&url, access_token, &body)
-            .await?;
+        let resp = self.post_json(&url, access_token, &body).await?;
 
         if !resp.status().is_success() {
             return Err(self.parse_error(resp).await);
@@ -146,10 +150,7 @@ impl CscClient {
         body: &T,
     ) -> Result<reqwest::Response> {
         let mut headers = HeaderMap::new();
-        headers.insert(
-            CONTENT_TYPE,
-            HeaderValue::from_static("application/json"),
-        );
+        headers.insert(CONTENT_TYPE, HeaderValue::from_static("application/json"));
         headers.insert(
             AUTHORIZATION,
             HeaderValue::from_str(access_token)
@@ -159,7 +160,11 @@ impl CscClient {
         // Attach DPoP proof if the signer produces one
         let dpop = self
             .dpop_signer
-            .sign_dpop("POST", url, Some(access_token.trim_start_matches("Bearer ")))
+            .sign_dpop(
+                "POST",
+                url,
+                Some(access_token.trim_start_matches("Bearer ")),
+            )
             .map_err(CscError::DPop)?;
         if !dpop.is_empty() {
             headers.insert(

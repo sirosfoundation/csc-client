@@ -68,10 +68,10 @@ pub struct CredentialInfoRequest {
     /// Whether to include certificate chain details.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub certificates: Option<String>,
-    /// Whether to include authorization info.
+    /// Whether to include certificate details (issuer, subject, validity).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub cert_info: Option<bool>,
-    /// Whether to include auth mode info.
+    /// Whether to include authorization mode info.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub auth_info: Option<bool>,
 }

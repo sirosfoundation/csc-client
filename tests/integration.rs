@@ -96,7 +96,10 @@ async fn credential_info_success() {
     assert_eq!(info.description, "Test signing key");
     assert_eq!(info.key.status, "enabled");
     assert_eq!(info.key.curve, Some("P-256".to_string()));
-    assert_eq!(info.cert.as_ref().unwrap().subject_dn, Some("CN=Test User".to_string()));
+    assert_eq!(
+        info.cert.as_ref().unwrap().subject_dn,
+        Some("CN=Test User".to_string())
+    );
     assert_eq!(info.auth.as_ref().unwrap().mode, "explicit");
     assert_eq!(info.multisign, 1);
 }
@@ -151,8 +154,14 @@ async fn api_error_response() {
         .unwrap_err();
 
     let err_str = err.to_string();
-    assert!(err_str.contains("invalid_token"), "expected invalid_token in: {err_str}");
-    assert!(err_str.contains("expired"), "expected 'expired' in: {err_str}");
+    assert!(
+        err_str.contains("invalid_token"),
+        "expected invalid_token in: {err_str}"
+    );
+    assert!(
+        err_str.contains("expired"),
+        "expected 'expired' in: {err_str}"
+    );
 }
 
 #[tokio::test]
