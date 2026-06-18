@@ -2,7 +2,7 @@
 name = "siros-csc-client"
 version = "0.1.0"
 edition = "2021"
-rust-version = "1.75"
+rust-version = "1.86"
 description = "CSC API v2.2 client for Qualified Electronic Signatures (QES)"
 license = "BSD-2-Clause"
 repository = "https://github.com/sirosfoundation/siros-csc-client"
