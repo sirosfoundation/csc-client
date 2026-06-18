@@ -1420,6 +1420,14 @@ async fn sign_hash_full_returns_response_id() {
 
     Mock::given(method("POST"))
         .and(path("/signatures/signHash"))
+        .and(body_partial_json(serde_json::json!({
+            "credentialID": "cred-001",
+            "SAD": "my-sad",
+            "operationMode": "A",
+            "validityPeriod": 60000,
+            "responseURI": "https://example.com/callback",
+            "clientData": "session-xyz"
+        })))
         .respond_with(ResponseTemplate::new(200).set_body_json(serde_json::json!({
             "signatures": [],
             "responseID": "async-op-12345"

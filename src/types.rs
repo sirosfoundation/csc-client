@@ -297,10 +297,10 @@ pub struct SignHashRequest {
     #[serde(rename = "operationMode", skip_serializing_if = "Option::is_none")]
     pub operation_mode: Option<String>,
     /// Validity period in milliseconds for async mode.
-    #[serde(rename = "validity_period", skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "validityPeriod", skip_serializing_if = "Option::is_none")]
     pub validity_period: Option<u64>,
     /// URI for async callback notification.
-    #[serde(rename = "response_uri", skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "responseURI", skip_serializing_if = "Option::is_none")]
     pub response_uri: Option<String>,
     /// Opaque client data returned unchanged in the response.
     #[serde(rename = "clientData", skip_serializing_if = "Option::is_none")]
