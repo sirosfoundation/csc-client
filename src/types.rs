@@ -61,18 +61,18 @@ pub struct CredentialsListResponse {
 
 /// Request body for `POST /csc/v2/credentials/info`.
 #[derive(Debug, Serialize)]
-#[serde(rename_all = "camelCase")]
 pub struct CredentialInfoRequest {
     /// The credential ID to query.
+    #[serde(rename = "credentialID")]
     pub credential_id: String,
     /// Whether to include certificate chain details.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub certificates: Option<String>,
     /// Whether to include certificate details (issuer, subject, validity).
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "certInfo", skip_serializing_if = "Option::is_none")]
     pub cert_info: Option<bool>,
     /// Whether to include authorization mode info.
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "authInfo", skip_serializing_if = "Option::is_none")]
     pub auth_info: Option<bool>,
 }
 
@@ -155,21 +155,24 @@ pub struct AuthInfo {
 
 /// Request body for `POST /csc/v2/signatures/signHash`.
 #[derive(Debug, Serialize)]
-#[serde(rename_all = "camelCase")]
 pub struct SignHashRequest {
     /// Credential ID to sign with.
+    #[serde(rename = "credentialID")]
     pub credential_id: String,
     /// Signature Activation Data (for explicit authorization).
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "SAD", skip_serializing_if = "Option::is_none")]
     pub sad: Option<String>,
     /// Base64-encoded hash values to sign.
+    #[serde(rename = "hashes")]
     pub hash: Vec<String>,
     /// Hash algorithm OID (e.g. `"2.16.840.1.101.3.4.2.1"` for SHA-256).
+    #[serde(rename = "hashAlgorithmOID")]
     pub hash_algo: String,
     /// Signature algorithm OID.
+    #[serde(rename = "signAlgo")]
     pub sign_algo: String,
     /// Signature format (e.g. `"P"` for PKCS#1).
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "signAlgoParams", skip_serializing_if = "Option::is_none")]
     pub sign_algo_params: Option<String>,
 }
 
