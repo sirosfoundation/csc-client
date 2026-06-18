@@ -1,12 +1,14 @@
 [package]
-name = "csc-client"
+name = "siros-csc-client"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.75"
 description = "CSC API v2.2 client for Qualified Electronic Signatures (QES)"
 license = "BSD-2-Clause"
+repository = "https://github.com/sirosfoundation/siros-csc-client"
 
 [lib]
+name = "csc_client"
 crate-type = ["lib", "cdylib", "staticlib"]
 
 [[bin]]
@@ -31,4 +33,4 @@ test-utils = []
 [dev-dependencies]
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 wiremock = "0.6"
-csc-client = { path = ".", features = ["test-utils"] }
+siros-csc-client = { path = ".", features = ["test-utils"] }

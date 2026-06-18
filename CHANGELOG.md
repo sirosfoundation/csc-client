@@ -40,5 +40,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OpenSSF Scorecard workflow.
 - Dependabot configuration.
 
-[Unreleased]: https://github.com/sirosfoundation/csc-client/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/sirosfoundation/csc-client/releases/tag/v0.1.0
+[Unreleased]: https://github.com/sirosfoundation/siros-csc-client/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/sirosfoundation/siros-csc-client/releases/tag/v0.1.0

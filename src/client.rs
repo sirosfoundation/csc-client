@@ -36,7 +36,7 @@ impl CscClient {
             .https_only(true)
             .timeout(std::time::Duration::from_secs(30))
             .connect_timeout(std::time::Duration::from_secs(10))
-            .user_agent(concat!("csc-client/", env!("CARGO_PKG_VERSION")))
+            .user_agent(concat!("siros-csc-client/", env!("CARGO_PKG_VERSION")))
             .build()
             .map_err(|e| CscError::Http(e.to_string()))?;
         Ok(Self {
